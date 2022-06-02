@@ -73,7 +73,7 @@ CREATE TABLE Seat(      #5.좌석
 
    
 CREATE TABLE Customer(   #6.회원고객 
-  custId INTEGER NOT NULL,                  #회원아이디 (6)ㅇ 
+  custId VARCHAR(40) NOT NULL,                  #회원아이디 (6)ㅇ 
   custName VARCHAR(40) NOT NULL,               #고객명 
   phoneNum VARCHAR(40) NOT NULL,               #휴대폰번호 
   email VARCHAR(40)   NOT NULL               #전자메일주소 
@@ -85,7 +85,7 @@ CREATE TABLE Reservation(   #7.예매정보
   payMethod VARCHAR(40) NOT NULL,            #결제방법 
   payStatus VARCHAR(40) NOT NULL,            #결제상태 
   payAmount INTEGER NOT NULL,               #결제금액 
-  custId INTEGER NOT NULL,                  #회원아이디 
+  custId VARCHAR(40) NOT NULL,                  #회원아이디 
   payDate DATE                     #결제일자 
 ); 
 
@@ -157,27 +157,27 @@ INSERT INTO Theater VALUES(9, 15, '사용가능');
 INSERT INTO Theater VALUES(10, 15, '사용가능');
 
 
-INSERT INTO Customer VALUES(1, '강상묵', '010-1342-3423', 'highjelly@naver.com');
-INSERT INTO Customer VALUES(2, '김원우', '010-4141-8835', 'dnjsdn2468@naver.com');
-INSERT INTO Customer VALUES(3, '이관태', '010-7345-3511', 'godfather@gmail.com');
-INSERT INTO Customer VALUES(4, '은정무', '010-8866-1246', 'loveradish@daum.com');
-INSERT INTO Customer VALUES(5, '이수혁', '010-5378-9923', 'LSH98@naver.com');
-INSERT INTO Customer VALUES(6, '김대웅', '010-2756-1142', 'bigwoong@nate.com');
-INSERT INTO Customer VALUES(7, '정준민', '010-9185-0339', 'mayy24th@naver.com');
-INSERT INTO Customer VALUES(8, '정휘준', '010-9288-1622', 'hwihwi2@naver.com');
-INSERT INTO Customer VALUES(9, '조석근', '010-8683-7704', '3x600@google.com');
-INSERT INTO Customer VALUES(10, '송규민', '010-9116-2441', '17011389@sju.ac.kr');
+INSERT INTO Customer VALUES('highjelly', '강상묵', '010-1342-3423', 'highjelly@naver.com');
+INSERT INTO Customer VALUES('dnjsdn2468', '김원우', '010-4141-8835', 'dnjsdn2468@naver.com');
+INSERT INTO Customer VALUES('godfather', '이관태', '010-7345-3511', 'godfather@gmail.com');
+INSERT INTO Customer VALUES('loveradish', '은정무', '010-8866-1246', 'loveradish@daum.com');
+INSERT INTO Customer VALUES('LSH98', '이수혁', '010-5378-9923', 'LSH98@naver.com');
+INSERT INTO Customer VALUES('bigwoong', '김대웅', '010-2756-1142', 'bigwoong@nate.com');
+INSERT INTO Customer VALUES('mayy24th', '정준민', '010-9185-0339', 'mayy24th@naver.com');
+INSERT INTO Customer VALUES('hwihwi2', '정휘준', '010-9288-1622', 'hwihwi2@naver.com');
+INSERT INTO Customer VALUES('3x600', '조석근', '010-8683-7704', '3x600@google.com');
+INSERT INTO Customer VALUES('17011389', '송규민', '010-9116-2441', '17011389@sju.ac.kr');
 
-INSERT INTO Reservation VALUES(1, '카드', '결제완료', 7000, 10, STR_TO_DATE('2021-05-26','%Y-%m-%d'));
-INSERT INTO Reservation VALUES(2, '현금', '결제대기', 7000, 9, NULL);
-INSERT INTO Reservation VALUES(3, '쿠폰', '결제완료', 8000, 8, STR_TO_DATE('2021-05-28','%Y-%m-%d'));
-INSERT INTO Reservation VALUES(4, '카드', '결제대기', 7000, 7, NULL);
-INSERT INTO Reservation VALUES(5, '카드', '결제완료', 8000, 6, STR_TO_DATE('2021-05-27','%Y-%m-%d'));
-INSERT INTO Reservation VALUES(6, '카드', '결제완료', 7000, 5, STR_TO_DATE('2021-05-25','%Y-%m-%d'));
-INSERT INTO Reservation VALUES(7, '카드', '결제완료', 7000, 4, STR_TO_DATE('2021-05-26','%Y-%m-%d'));
-INSERT INTO Reservation VALUES(8, '현금', '결제대기', 8000, 3, NULL);
-INSERT INTO Reservation VALUES(9, '현금', '결제완료', 7000, 2, STR_TO_DATE('2021-05-28','%Y-%m-%d'));
-INSERT INTO Reservation VALUES(10, '카드', '결제대기', 8000, 1, NULL);
+INSERT INTO Reservation VALUES(1, '카드', '결제완료', 7000, '17011389', STR_TO_DATE('2021-05-26','%Y-%m-%d'));
+INSERT INTO Reservation VALUES(2, '현금', '결제대기', 7000, '3x600', NULL);
+INSERT INTO Reservation VALUES(3, '쿠폰', '결제완료', 8000, 'hwihwi2', STR_TO_DATE('2021-05-28','%Y-%m-%d'));
+INSERT INTO Reservation VALUES(4, '카드', '결제대기', 7000, 'mayy24th', NULL);
+INSERT INTO Reservation VALUES(5, '카드', '결제완료', 8000, 'bigwoong', STR_TO_DATE('2021-05-27','%Y-%m-%d'));
+INSERT INTO Reservation VALUES(6, '카드', '결제완료', 7000, 'LSH98', STR_TO_DATE('2021-05-25','%Y-%m-%d'));
+INSERT INTO Reservation VALUES(7, '카드', '결제완료', 7000, 'loveradish', STR_TO_DATE('2021-05-26','%Y-%m-%d'));
+INSERT INTO Reservation VALUES(8, '현금', '결제대기', 8000, 'godfather', NULL);
+INSERT INTO Reservation VALUES(9, '현금', '결제완료', 7000, 'dnjsdn2468', STR_TO_DATE('2021-05-28','%Y-%m-%d'));
+INSERT INTO Reservation VALUES(10, '카드', '결제대기', 8000, 'highjelly',NULL);
 
 INSERT INTO Schedule VALUES(1, 1, 1, STR_TO_DATE('2021-05-28','%Y-%m-%d'), '토요일', 1, '17:30');
 INSERT INTO Schedule VALUES(2, 2, 2, STR_TO_DATE('2021-05-28','%Y-%m-%d'), '토요일', 1, '17:30');
