@@ -1,22 +1,31 @@
 package DBPR;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.*;
+import javax.swing.*;
+import javax.swing.event.*;
 import java.sql.*;
+
 	
-public class Movie {
+public class Movie extends JFrame{
 
 	public static void main(String args[]) {
 		
 		DB db = new DB();
 		String upDateDB = "";
+		GUI mv = new GUI(db);
 		
-		for (int i=1; i<=10; i++) {
+		// seat 테이블에 아무것도 없다면 돌아가게 if문 으로 수정해야함
+		/*for (int i=1; i<=10; i++) {
 			for (int j=1; j<=15; j++) {
 				upDateDB = "INSERT INTO Seat VALUES(" + i + "," + j + "," + "'사용가능')";
 				db.inSert(upDateDB);
 			}
-		}
+		}*/
 	}
 }
+
 
 class DB {
 	Connection con = null;
