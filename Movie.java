@@ -10,11 +10,13 @@ import java.sql.*;
 	
 public class Movie extends JFrame{
 
+	static GUI mv;
+	
 	public static void main(String args[]) {
 		
 		DB db = new DB();
 		String upDateDB = "";
-		GUI mv = new GUI(db);
+		mv = new GUI(db);
 		
 		// seat 테이블에 아무것도 없다면 돌아가게 if문 으로 수정해야함
 		/*for (int i=1; i<=10; i++) {
@@ -31,6 +33,8 @@ class DB {
 	Connection con = null;
 	Statement stmt = null;
 	ResultSet res = null;
+	ResultSetMetaData Meta = null;
+
 	
 	String username = "madang";
 	String password = "madang";
