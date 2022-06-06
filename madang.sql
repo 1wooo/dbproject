@@ -31,7 +31,7 @@ CREATE TABLE Movie (   #1.영화
    
 CREATE TABLE Schedule (   #2.상영일정 
   scheduleNum      INTEGER NOT NULL,  #상영일정번호 (3) 
-  movieNum          INTEGER NOT NULL,           #영화번호 (1) 
+  movieNum           INTEGER NOT NULL,           #영화번호 (1) 
   theaterNum       INTEGER NOT NULL,            #상영관번호 (2) 
   screeningStart   DATE,             #상영시작일 
   screeningDate      VARCHAR(40) NOT NULL,        #상영요일 
@@ -64,12 +64,15 @@ CREATE TABLE Ticket(   #4.티켓
  
  
 CREATE TABLE Seat(      #5.좌석 
-  theaterNum INTEGER NOT NULL,               #상영관번호 (2) 
+
+  scheduleNum INTEGER NOT NULL,
   seatNum INTEGER NOT NULL,                  #좌석번호 (4) 
+  theaterNum INTEGER NOT NULL,               #상영관번호 (2) 
   seatUsed VARCHAR(40) NOT NULL,                  #좌석사용여부 
-  
-  PRIMARY KEY (seatNum, theaterNum)
+
+  PRIMARY KEY (seatNum, theaterNum, scheduleNum)
 ); 
+
 
    
 CREATE TABLE Customer(   #6.회원고객 
@@ -129,10 +132,13 @@ ALTER TABLE Ticket
   ADD (CONSTRAINT R_7 FOREIGN KEY (reserveNum) REFERENCES Reservation (reserveNum)); 
  
 ALTER TABLE Seat 
-  ADD (CONSTRAINT R_8 FOREIGN KEY (theaterNum) REFERENCES Theater (theaterNum)); 
+  ADD (CONSTRAINT R_8 FOREIGN KEY (theaterNum) REFERENCES Theater (theaterNum));
+  
+ALTER TABLE Seat
+  ADD (CONSTRAINT R_9 FOREIGN KEY (scheduleNum) REFERENCES Schedule (scheduleNum));
 
 ALTER TABLE Reservation 
-  ADD (CONSTRAINT R_9 FOREIGN KEY (custId) REFERENCES Customer (custId)); 
+  ADD (CONSTRAINT R_10 FOREIGN KEY (custId) REFERENCES Customer (custId)); 
  
 INSERT INTO Movie VALUES(1, '범죄도시2', 106, 'C', '이상용', '마동석', '범죄, 액션, 블랙 코미디', '영화 <범죄도시>의 속편으로', STR_TO_DATE('2021-01-18','%Y-%m-%d')); 
 INSERT INTO Movie VALUES(2, '닥터 스트레인지', 126, 'B', '샘 레이미', '베네딕트 컴버배치', '슈퍼히어로, 다크 판타지, 액션, 어드벤처, SF', '마블 시네마틱 유니버스 페이즈 4의 5번째 영화이자, 닥터 스트레인지 실사영화 시리즈의 2번째 작품이다.', STR_TO_DATE('2021-05-04','%Y-%m-%d')); 
@@ -168,16 +174,16 @@ INSERT INTO Customer VALUES('hwihwi2', '정휘준', '010-9288-1622', 'hwihwi2@na
 INSERT INTO Customer VALUES('3x600', '조석근', '010-8683-7704', '3x600@google.com');
 INSERT INTO Customer VALUES('17011389', '송규민', '010-9116-2441', '17011389@sju.ac.kr');
 
-INSERT INTO Reservation VALUES(1, '카드', '결제완료', 7000, '17011389', STR_TO_DATE('2021-01-25','%Y-%m-%d')); # 스케줄2
-INSERT INTO Reservation VALUES(2, '현금', '결제대기', 7000, '3x600', NULL);										# 스케줄10 미결제
-INSERT INTO Reservation VALUES(3, '쿠폰', '결제완료', 8000, 'hwihwi2', STR_TO_DATE('2021-03-25','%Y-%m-%d'));	# 스케줄5
-INSERT INTO Reservation VALUES(4, '카드', '결제대기', 7000, 'mayy24th', NULL);									# 스케줄6 미결제
-INSERT INTO Reservation VALUES(5, '카드', '결제완료', 8000, 'bigwoong', STR_TO_DATE('2021-08-01','%Y-%m-%d'));	# 스케줄14 
-INSERT INTO Reservation VALUES(6, '카드', '결제완료', 7000, 'LSH98', STR_TO_DATE('2021-06-30','%Y-%m-%d'));		# 스케줄12 
-INSERT INTO Reservation VALUES(7, '카드', '결제완료', 7000, 'loveradish', STR_TO_DATE('2021-10-01','%Y-%m-%d'));# 스케줄15
-INSERT INTO Reservation VALUES(8, '현금', '결제대기', 8000, 'godfather', NULL);									# 스케줄16 미결제
-INSERT INTO Reservation VALUES(9, '현금', '결제완료', 7000, 'dnjsdn2468', STR_TO_DATE('2021-10-21','%Y-%m-%d'));# 스케줄18
-INSERT INTO Reservation VALUES(10, '카드', '결제대기', 8000, 'highjelly',NULL);									# 스케줄20 미결제
+INSERT INTO Reservation VALUES(1, '카드(8000)', '결제완료', 8000, '17011389', STR_TO_DATE('2021-01-25','%Y-%m-%d')); # 스케줄2
+INSERT INTO Reservation VALUES(2, '현금(7000)', '결제대기', 7000, '3x600', NULL);										# 스케줄10 미결제
+INSERT INTO Reservation VALUES(3, '카드(8000)', '결제완료', 8000, 'hwihwi2', STR_TO_DATE('2021-03-25','%Y-%m-%d'));	# 스케줄5
+INSERT INTO Reservation VALUES(4, '현금(7000)', '결제대기', 7000, 'mayy24th', NULL);									# 스케줄6 미결제
+INSERT INTO Reservation VALUES(5, '카드(8000)', '결제완료', 8000, 'bigwoong', STR_TO_DATE('2021-08-01','%Y-%m-%d'));	# 스케줄14 
+INSERT INTO Reservation VALUES(6, '카드(8000)', '결제대기', 7000, 'LSH98', STR_TO_DATE('2021-06-30','%Y-%m-%d'));		# 스케줄12 
+INSERT INTO Reservation VALUES(7, '카드(8000)', '결제완료', 8000, 'loveradish', STR_TO_DATE('2021-10-01','%Y-%m-%d'));# 스케줄15
+INSERT INTO Reservation VALUES(8, '현금(7000)', '결제대기', 8000, 'godfather', NULL);									# 스케줄16 미결제
+INSERT INTO Reservation VALUES(9, '카드(8000)', '결제완료', 7000, 'dnjsdn2468', STR_TO_DATE('2021-10-21','%Y-%m-%d'));# 스케줄18
+INSERT INTO Reservation VALUES(10, '현금(7000)', '결제대기', 8000, 'highjelly',NULL);									# 스케줄20 미결제
 
 INSERT INTO Schedule VALUES(1, 1, 1, STR_TO_DATE('2021-01-19','%Y-%m-%d'), '화요일', 1, '17:30');
 INSERT INTO Schedule VALUES(2, 1, 3, STR_TO_DATE('2021-01-27','%Y-%m-%d'), '수요일', 2, '14:20');
