@@ -95,7 +95,7 @@ public class login extends JFrame{
 					e1.printStackTrace();
 				}
 				if (chkk == 0) {
-					warning.showMessageDialog(null,text);	
+					warning.showMessageDialog(null,"올바르지 않은 아이디입니다.");	
 				}
 				
 			}
