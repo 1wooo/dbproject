@@ -25,6 +25,8 @@ public class login extends JFrame{
 	JButton chk = new JButton("확인");
 	// 스윙 컴포넌트들 
 	
+	String text; // 다른 클래스에 ID값을 넘겨주기 위함
+	
 	int chkk = 0;
 	
 	public login(DB db) {
@@ -33,10 +35,9 @@ public class login extends JFrame{
 		stmt = db_forlogin.stmt;
 		
 		setTitle("회원아이디 입력");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		setContentPane(loginbox);
-		
 		loginbox.setLayout(null);
 		
 		loginbox.add(id);
@@ -62,7 +63,7 @@ public class login extends JFrame{
 			
 			String SQL = "select custId from Customer;";
 			JButton b = (JButton)e.getSource();
-			String text = id.getText(); // 텍스트 박스 안에 있는 id 문자열 받아오기
+			text = id.getText(); // 텍스트 박스 안에 있는 id 문자열 받아오기
 			String st = b.getText(); // 버튼 텍스트 받아오기
 			
 			if (st == "확인") {
@@ -83,6 +84,7 @@ public class login extends JFrame{
 							dispose();
 							//System.out.println(chkk);
 							Movie.mv.BG.setVisible(false);
+							Movie.mv.Mainsc.setVisible(true);
 							Movie.mv.setContentPane(Movie.mv.Mainsc);
 						}
 					}
@@ -99,4 +101,11 @@ public class login extends JFrame{
 			}
 		}
 	}
+
+
+	public String getID() {
+		return text;
+	}
+
+
 }
