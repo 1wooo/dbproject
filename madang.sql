@@ -64,7 +64,6 @@ CREATE TABLE Ticket(   #4.티켓
  
  
 CREATE TABLE Seat(      #5.좌석 
-
   scheduleNum INTEGER NOT NULL,
   seatNum INTEGER NOT NULL,                  #좌석번호 (4) 
   theaterNum INTEGER NOT NULL,               #상영관번호 (2) 
